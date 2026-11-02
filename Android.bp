@@ -5,9 +5,10 @@
 soong_namespace {
     imports: [
         "device/blackberry/sdm660-common",
-        "hardware/qcom-caf/msm8998",
+        "hardware/qcom-caf/sdm660",
         "hardware/qcom-caf/wlan",
         "vendor/qcom/opensource/dataservices",
+        "vendor/qcom/opensource/commonsys/display",
         "vendor/qcom/opensource/data-ipa-cfg-mgr-legacy-um",
         "vendor/qcom/opensource/display",
     ],
@@ -16,6 +17,7 @@ soong_namespace {
 cc_prebuilt_library_shared {
     name: "com.qualcomm.qti.ant@1.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -45,6 +47,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "com.quicinc.cne.constants@1.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -92,6 +95,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "com.quicinc.cne.constants@2.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -139,6 +143,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "com.quicinc.cne.server@2.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -188,6 +193,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "eglSubDriverAndroid",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -272,6 +278,7 @@ cc_prebuilt_library_shared {
                 "libc++",
                 "libc",
                 "libm",
+                "libdl",
             ],
         },
         android_arm64: {
@@ -288,6 +295,7 @@ cc_prebuilt_library_shared {
                 "libc++",
                 "libc",
                 "libm",
+                "libdl",
             ],
         },
     },
@@ -318,6 +326,7 @@ cc_prebuilt_library_shared {
                 "libc++",
                 "libc",
                 "libm",
+                "libdl",
             ],
         },
         android_arm64: {
@@ -333,6 +342,7 @@ cc_prebuilt_library_shared {
                 "libc++",
                 "libc",
                 "libm",
+                "libdl",
             ],
         },
     },
@@ -365,6 +375,7 @@ cc_prebuilt_library_shared {
                 "libc++",
                 "libc",
                 "libm",
+                "libdl",
             ],
         },
         android_arm64: {
@@ -382,11 +393,55 @@ cc_prebuilt_library_shared {
                 "libc++",
                 "libc",
                 "libm",
+                "libdl",
             ],
         },
     },
     compile_multilib: "both",
     check_elf_files: false,
+    relative_install_path: "egl",
+    prefer: true,
+    soc_specific: true,
+}
+
+cc_prebuilt_library_shared {
+    name: "libq3dtools_esx",
+    owner: "blackberry",
+    check_elf_files: false,
+    strip: {
+        none: true,
+    },
+    target: {
+        android_arm: {
+            srcs: [
+                "proprietary/vendor/lib/egl/libq3dtools_esx.so",
+            ],
+            shared_libs: [
+                "libcutils",
+                "liblog",
+                "libz",
+                "libdl",
+                "libc++",
+                "libc",
+                "libm",
+            ],
+        },
+        android_arm64: {
+            srcs: [
+                "proprietary/vendor/lib64/egl/libq3dtools_esx.so",
+            ],
+            shared_libs: [
+                "libcutils",
+                "liblog",
+                "libz",
+                "libdl",
+                "libc++",
+                "libc",
+                "libm",
+            ],
+        },
+    },
+    compile_multilib: "both",
     relative_install_path: "egl",
     prefer: true,
     soc_specific: true,
@@ -435,156 +490,120 @@ cc_prebuilt_library_shared {
     soc_specific: true,
 }
 
-cc_prebuilt_library_shared {
-    name: "libq3dtools_esx",
-    owner: "blackberry",
-    strip: {
-        none: true,
-    },
-    target: {
-        android_arm: {
-            srcs: [
-                "proprietary/vendor/lib/egl/libq3dtools_esx.so",
-            ],
-            shared_libs: [
-                "libcutils",
-                "liblog",
-                "libz",
-                "libdl",
-                "libc++",
-                "libc",
-                "libm",
-            ],
-        },
-        android_arm64: {
-            srcs: [
-                "proprietary/vendor/lib64/egl/libq3dtools_esx.so",
-            ],
-            shared_libs: [
-                "libcutils",
-                "liblog",
-                "libz",
-                "libdl",
-                "libc++",
-                "libc",
-                "libm",
-            ],
-        },
-    },
-    compile_multilib: "both",
-    check_elf_files: false,
-    relative_install_path: "egl",
-    prefer: true,
-    soc_specific: true,
-}
-
-cc_prebuilt_library_shared {
-    name: "android.hardware.gatekeeper@1.0-impl-qti",
-    owner: "blackberry",
-    strip: {
-        none: true,
-    },
-    target: {
-        android_arm: {
-            srcs: [
-                "proprietary/vendor/lib/hw/android.hardware.gatekeeper@1.0-impl-qti.so",
-            ],
-            shared_libs: [
-                "android.hardware.gatekeeper@1.0",
-                "libhidlbase",
-                "libhidltransport",
-                "libhwbinder",
-                "libutils",
-                "libkeymasterdeviceutils",
-                "liblog",
-                "libc++",
-                "libc",
-                "libm",
-                "libdl",
-            ],
-        },
-        android_arm64: {
-            srcs: [
-                "proprietary/vendor/lib64/hw/android.hardware.gatekeeper@1.0-impl-qti.so",
-            ],
-            shared_libs: [
-                "android.hardware.gatekeeper@1.0",
-                "libhidlbase",
-                "libhidltransport",
-                "libhwbinder",
-                "libutils",
-                "libkeymasterdeviceutils",
-                "liblog",
-                "libc++",
-                "libc",
-                "libm",
-                "libdl",
-            ],
-        },
-    },
-    compile_multilib: "both",
-    relative_install_path: "hw",
-    prefer: true,
-    soc_specific: true,
-}
-
+// QTI Keymaster 3.0 impl
 cc_prebuilt_library_shared {
     name: "android.hardware.keymaster@3.0-impl-qti",
     owner: "blackberry",
-    strip: {
-        none: true,
-    },
+    strip: { none: true },
+    check_elf_files: false,
     target: {
         android_arm: {
-            srcs: [
-                "proprietary/vendor/lib/hw/android.hardware.keymaster@3.0-impl-qti.so",
-            ],
-            shared_libs: [
-                "liblog",
-                "libcrypto",
-                "libhidlbase",
-                "libhidltransport",
-                "libhwbinder",
-                "libutils",
-                "libcutils",
-                "libkeymasterdeviceutils",
-                "android.hardware.keymaster@3.0",
-                "libc++",
-                "libc",
-                "libm",
-                "libdl",
-            ],
+            srcs: ["proprietary/vendor/lib/hw/android.hardware.keymaster@3.0-impl-qti.so"],
         },
         android_arm64: {
-            srcs: [
-                "proprietary/vendor/lib64/hw/android.hardware.keymaster@3.0-impl-qti.so",
-            ],
-            shared_libs: [
-                "liblog",
-                "libcrypto",
-                "libhidlbase",
-                "libhidltransport",
-                "libhwbinder",
-                "libutils",
-                "libcutils",
-                "libkeymasterdeviceutils",
-                "android.hardware.keymaster@3.0",
-                "libc++",
-                "libc",
-                "libm",
-                "libdl",
-            ],
+            srcs: ["proprietary/vendor/lib64/hw/android.hardware.keymaster@3.0-impl-qti.so"],
         },
     },
     compile_multilib: "both",
     relative_install_path: "hw",
     prefer: true,
+    soc_specific: true,
+}
+
+// QTI Keymaster 3.0 service
+cc_prebuilt_binary {
+    name: "android.hardware.keymaster@3.0-service-qti",
+    owner: "blackberry",
+    strip: { none: true },
+    check_elf_files: false,
+    target: {
+        android_arm64: {
+            srcs: ["proprietary/vendor/bin/hw/android.hardware.keymaster@3.0-service-qti"],
+        },
+    },
+    compile_multilib: "64",
+    prefer: true,
+    relative_install_path: "hw",
+    soc_specific: true,
+}
+
+// QTI Keymaster 4.0 service (PIE9)
+cc_prebuilt_binary {
+    name: "android.hardware.keymaster@4.0-service-qti",
+    owner: "blackberry",
+    strip: { none: true },
+    check_elf_files: false,
+    target: {
+        android_arm64: {
+            srcs: ["proprietary/vendor/bin/hw/android.hardware.keymaster@4.0-service-qti"],
+        },
+    },
+    compile_multilib: "64",
+    prefer: true,
+    relative_install_path: "hw",
+    soc_specific: true,
+}
+
+// QTI Keymaster 4.0 library (PIE9)
+cc_prebuilt_library_shared {
+    name: "libqtikeymaster4",
+    owner: "blackberry",
+    strip: { none: true },
+    check_elf_files: false,
+    target: {
+        android_arm: {
+            srcs: ["proprietary/vendor/lib/libqtikeymaster4.so"],
+        },
+        android_arm64: {
+            srcs: ["proprietary/vendor/lib64/libqtikeymaster4.so"],
+        },
+    },
+    compile_multilib: "both",
+    prefer: true,
+    soc_specific: true,
+}
+
+// QTI Gatekeeper 1.0 impl (BB blobs from LOS22)
+cc_prebuilt_library_shared {
+    name: "android.hardware.gatekeeper@1.0-impl-qti",
+    owner: "blackberry",
+    strip: { none: true },
+    check_elf_files: false,
+    target: {
+        android_arm: {
+            srcs: ["proprietary/vendor/lib/hw/android.hardware.gatekeeper@1.0-impl-qti.so"],
+        },
+        android_arm64: {
+            srcs: ["proprietary/vendor/lib64/hw/android.hardware.gatekeeper@1.0-impl-qti.so"],
+        },
+    },
+    compile_multilib: "both",
+    relative_install_path: "hw",
+    prefer: true,
+    soc_specific: true,
+}
+
+// QTI Gatekeeper 1.0 service
+cc_prebuilt_binary {
+    name: "android.hardware.gatekeeper@1.0-service-qti",
+    owner: "blackberry",
+    strip: { none: true },
+    check_elf_files: false,
+    target: {
+        android_arm64: {
+            srcs: ["proprietary/vendor/bin/hw/android.hardware.gatekeeper@1.0-service-qti"],
+        },
+    },
+    compile_multilib: "64",
+    prefer: true,
+    relative_install_path: "hw",
     soc_specific: true,
 }
 
 cc_prebuilt_library_shared {
     name: "sound_trigger.primary.sdm660",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -631,6 +650,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vulkan.adreno",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -689,7 +709,6 @@ cc_prebuilt_library_shared {
         },
     },
     compile_multilib: "both",
-    check_elf_files: false,
     relative_install_path: "hw",
     prefer: true,
     soc_specific: true,
@@ -764,6 +783,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libCB",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -816,7 +836,6 @@ cc_prebuilt_library_shared {
         },
     },
     compile_multilib: "both",
-    check_elf_files: false,
     prefer: true,
     soc_specific: true,
 }
@@ -824,6 +843,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libGPreqcancel",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -871,6 +891,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libGPreqcancel_svc",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -922,7 +943,6 @@ cc_prebuilt_library_shared {
             ],
             shared_libs: [
                 "libcutils",
-                "libvndksupport",
                 "libc++",
                 "libc",
                 "libm",
@@ -935,7 +955,6 @@ cc_prebuilt_library_shared {
             ],
             shared_libs: [
                 "libcutils",
-                "libvndksupport",
                 "libc++",
                 "libc",
                 "libm",
@@ -952,6 +971,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libQSEEComAPI",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -991,8 +1011,49 @@ cc_prebuilt_library_shared {
 }
 
 cc_prebuilt_library_shared {
+    name: "libgpudataproducer",
+    owner: "blackberry",
+    check_elf_files: false,
+    strip: {
+        none: true,
+    },
+    target: {
+        android_arm: {
+            srcs: [
+                "proprietary/vendor/lib/libgpudataproducer.so",
+            ],
+            shared_libs: [
+                "liblog",
+                "libz",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+        android_arm64: {
+            srcs: [
+                "proprietary/vendor/lib64/libgpudataproducer.so",
+            ],
+            shared_libs: [
+                "liblog",
+                "libz",
+                "libc++",
+                "libc",
+                "libm",
+                "libdl",
+            ],
+        },
+    },
+    compile_multilib: "both",
+    prefer: true,
+    soc_specific: true,
+}
+
+cc_prebuilt_library_shared {
     name: "libStDrvInt",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -1023,44 +1084,6 @@ cc_prebuilt_library_shared {
         },
     },
     compile_multilib: "both",
-    prefer: true,
-    soc_specific: true,
-}
-
-cc_prebuilt_library_shared {
-    name: "libVkLayer_q3dtools",
-    owner: "blackberry",
-    strip: {
-        none: true,
-    },
-    target: {
-        android_arm: {
-            srcs: [
-                "proprietary/vendor/lib/libVkLayer_q3dtools.so",
-            ],
-            shared_libs: [
-                "liblog",
-                "libz",
-                "libc",
-                "libm",
-                "libdl",
-            ],
-        },
-        android_arm64: {
-            srcs: [
-                "proprietary/vendor/lib64/libVkLayer_q3dtools.so",
-            ],
-            shared_libs: [
-                "liblog",
-                "libz",
-                "libc",
-                "libm",
-                "libdl",
-            ],
-        },
-    },
-    compile_multilib: "both",
-    check_elf_files: false,
     prefer: true,
     soc_specific: true,
 }
@@ -1184,6 +1207,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libdiag",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -1223,6 +1247,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libdrmfs",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -1270,6 +1295,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libdrmtime",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -1317,6 +1343,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libdsutils",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -1362,6 +1389,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libevent_observer",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -1405,6 +1433,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libfeedbackhandler",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -1440,6 +1469,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libgcs-calwrapper",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -1479,6 +1509,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libgcs-ipc",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -1520,6 +1551,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libgcs-osal",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -1559,6 +1591,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libgcs",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -1600,48 +1633,9 @@ cc_prebuilt_library_shared {
 }
 
 cc_prebuilt_library_shared {
-    name: "libgpudataproducer",
-    owner: "blackberry",
-    strip: {
-        none: true,
-    },
-    target: {
-        android_arm: {
-            srcs: [
-                "proprietary/vendor/lib/libgpudataproducer.so",
-            ],
-            shared_libs: [
-                "liblog",
-                "libz",
-                "libc++",
-                "libc",
-                "libm",
-                "libdl",
-            ],
-        },
-        android_arm64: {
-            srcs: [
-                "proprietary/vendor/lib64/libgpudataproducer.so",
-            ],
-            shared_libs: [
-                "liblog",
-                "libz",
-                "libc++",
-                "libc",
-                "libm",
-                "libdl",
-            ],
-        },
-    },
-    compile_multilib: "both",
-    check_elf_files: false,
-    prefer: true,
-    soc_specific: true,
-}
-
-cc_prebuilt_library_shared {
     name: "libgpustats",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -1687,6 +1681,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libgsl",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -1725,7 +1720,6 @@ cc_prebuilt_library_shared {
         },
     },
     compile_multilib: "both",
-    check_elf_files: false,
     prefer: true,
     soc_specific: true,
 }
@@ -1733,6 +1727,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libhdr_tm",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -1780,6 +1775,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libidl",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -1815,6 +1811,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libkeymasterdeviceutils",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -1860,6 +1857,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libkeymasterprovision",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -1901,8 +1899,28 @@ cc_prebuilt_library_shared {
 }
 
 cc_prebuilt_library_shared {
+    name: "libqcbor",
+    owner: "blackberry",
+    check_elf_files: false,
+    strip: {
+        none: true,
+    },
+    target: {
+        android_arm64: {
+            srcs: [
+                "proprietary/vendor/lib64/libqcbor.so",
+            ],
+        },
+    },
+    compile_multilib: "64",
+    prefer: true,
+    soc_specific: true,
+}
+
+cc_prebuilt_library_shared {
     name: "libkeymasterutils",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -2020,6 +2038,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libmdmdetect",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -2061,6 +2080,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libmmosal_proprietary",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -2100,50 +2120,9 @@ cc_prebuilt_library_shared {
 }
 
 cc_prebuilt_library_shared {
-    name: "libperfgluelayer",
-    owner: "blackberry",
-    strip: {
-        none: true,
-    },
-    target: {
-        android_arm: {
-            srcs: [
-                "proprietary/vendor/lib/libperfgluelayer.so",
-            ],
-            shared_libs: [
-                "libutils",
-                "liblog",
-                "libcutils",
-                "libc++",
-                "libc",
-                "libm",
-                "libdl",
-            ],
-        },
-        android_arm64: {
-            srcs: [
-                "proprietary/vendor/lib64/libperfgluelayer.so",
-            ],
-            shared_libs: [
-                "libutils",
-                "liblog",
-                "libcutils",
-                "libc++",
-                "libc",
-                "libm",
-                "libdl",
-            ],
-        },
-    },
-    compile_multilib: "both",
-    check_elf_files: false,
-    prefer: true,
-    soc_specific: true,
-}
-
-cc_prebuilt_library_shared {
     name: "libqcci_legacy",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -2191,6 +2170,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libqdi",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -2244,6 +2224,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libqdp",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -2293,6 +2274,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libqisl",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -2334,6 +2316,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libqmi",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -2383,6 +2366,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libqmi_cci",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -2426,6 +2410,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libqmi_client_helper",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -2477,6 +2462,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libqmi_client_qmux",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -2524,6 +2510,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libqmi_common_so",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -2563,6 +2550,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libqmi_csi",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -2606,6 +2594,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libqmi_encdec",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -2645,6 +2634,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libqmi_legacy",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -2694,6 +2684,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libqmiservices",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -2731,6 +2722,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libqseed3",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -2766,6 +2758,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libqsocket",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -2801,6 +2794,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "librpmb",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -2886,6 +2880,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libsdm-color",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -2933,6 +2928,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libsdm-diag",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -2974,6 +2970,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libsdm-disp-vndapis",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -3021,6 +3018,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libsdmextension",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -3054,6 +3052,8 @@ cc_prebuilt_library_shared {
     prefer: true,
     soc_specific: true,
 }
+
+// libsdmutils prebuilt removed - built from source in hardware/qcom-caf/sdm660/display
 
 cc_prebuilt_library_shared {
     name: "libsecureui",
@@ -3137,6 +3137,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libsensor1",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -3186,6 +3187,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libsensor_reg",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -3229,6 +3231,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libssd",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -3274,6 +3277,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libthermalclient",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -3313,6 +3317,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libtime_genoff",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -3352,6 +3357,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libtinyxml2_1",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -3387,6 +3393,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libxml",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -3428,6 +3435,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "sensor_calibrate",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -3473,6 +3481,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "sensors.ssc",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -3524,6 +3533,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.qteeconnector@1.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -3571,6 +3581,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "android.hardware.drm@1.0-impl",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -3605,6 +3616,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libOmxVideoDSMode",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -3617,7 +3629,6 @@ cc_prebuilt_library_shared {
                 "liblog",
                 "libmmosal_proprietary",
                 "libutils",
-                "libOmxCore",
                 "libwfdcommonutils_proprietary",
                 "libwfdmmservice",
                 "libbinder",
@@ -3636,6 +3647,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libadpcmdec",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -3660,6 +3672,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libsmwrapper",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -3686,6 +3699,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libvqzip",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -3713,6 +3727,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libwfdcommonutils_proprietary",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -3742,6 +3757,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libwfdmmservice",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -3771,6 +3787,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libwvhidl",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -3806,6 +3823,7 @@ cc_prebuilt_library_shared {
     name: "com.qualcomm.qti.dpm.api@1.0_vendor",
     stem: "com.qualcomm.qti.dpm.api@1.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -3834,6 +3852,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "com.qualcomm.qti.imscmservice@2.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -3862,6 +3881,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "com.qualcomm.qti.imscmservice@2.1",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -3891,6 +3911,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "com.qualcomm.qti.imscmservice@2.2",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -3921,6 +3942,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "com.qualcomm.qti.uceservice@2.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -3949,6 +3971,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "com.qualcomm.qti.uceservice@2.1",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -3978,6 +4001,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "com.qualcomm.qti.uceservice@2.2",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -4008,6 +4032,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "com.qualcomm.qti.uceservice@2.3",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -4039,6 +4064,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "ftm_fm_lib",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -4069,6 +4095,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "android.hardware.bluetooth@1.0-impl-qti",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -4104,6 +4131,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.gnss@4.0-impl",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -4151,6 +4179,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.bluetooth_sar@1.1-impl",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -4184,6 +4213,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.fm@1.0-impl",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -4219,6 +4249,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.qccvndhal@1.0-impl",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -4251,6 +4282,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.qteeconnector@1.0-impl",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -4285,6 +4317,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "lib-imsSDP",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -4313,6 +4346,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "lib-imscmservice",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -4346,6 +4380,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "lib-imsdpl",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -4379,6 +4414,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "lib-imsqimf",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -4406,6 +4442,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "lib-imsrcs-v2",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -4459,6 +4496,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "lib-imsrcsbaseimpl",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -4504,6 +4542,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "lib-imsvtcore",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -4537,6 +4576,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "lib-imsxml",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -4564,6 +4604,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "lib-rcsconfig",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -4603,6 +4644,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "lib-rtpcommon",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -4632,6 +4674,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "lib-rtpcore",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -4663,6 +4706,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "lib-rtpsl",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -4695,6 +4739,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "lib-siputility",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -4723,6 +4768,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "lib-uceservice",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -4761,6 +4807,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libQTEEConnector_vendor",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -4791,6 +4838,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libasn1cper",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -4817,6 +4865,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libasn1crt",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -4842,6 +4891,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libasn1crtx",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -4866,6 +4916,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libbt-hidlclient",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -4896,6 +4947,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libbtnv",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -4920,6 +4972,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libcdfw",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -4946,6 +4999,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libcdfw_remote_api",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -5029,6 +5083,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libcneapiclient",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -5064,6 +5119,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libcneoplookup",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -5090,6 +5146,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libconfigdb",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -5118,6 +5175,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libdataitems",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -5146,6 +5204,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libdisp-aba",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -5172,6 +5231,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libdpmqmihal",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -5204,6 +5264,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libdsi_netctrl",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -5241,6 +5302,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libgdtap",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -5272,6 +5334,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libizat_client_api",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -5298,6 +5361,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libizat_core",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -5329,6 +5393,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "liblbs_core",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -5365,6 +5430,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libloc_api_v02",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -5396,6 +5462,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libloc_socket",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -5425,6 +5492,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "liblocationservice",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -5458,6 +5526,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "liblocationservice_glue",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -5492,6 +5561,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "liblowi_client",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -5519,6 +5589,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "liblqe",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -5551,6 +5622,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libminksocket",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -5578,6 +5650,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libnetmgr",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -5608,6 +5681,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libnetmgr_common",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -5640,6 +5714,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libnetmgr_nr_fusion",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -5672,6 +5747,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libnetmgr_rmnet_ext",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -5704,6 +5780,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libnlnetmgr",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -5735,6 +5812,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libpdmapper",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -5766,6 +5844,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libperipheral_client",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -5795,6 +5874,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libpn553_fw",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -5813,6 +5893,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libqcc_file_agent",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -5844,6 +5925,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libqcmaputils",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -5870,6 +5952,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libqcrilFramework",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -5898,6 +5981,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libqcrildatactl",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -5924,6 +6008,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libqrtr",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -5948,6 +6033,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "librcc",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -6071,6 +6157,7 @@ cc_prebuilt_library_shared {
         },
     },
     compile_multilib: "64",
+    check_elf_files: false,
     prefer: true,
     soc_specific: true,
 }
@@ -6078,6 +6165,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libril-qc-logger",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -6105,6 +6193,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libril-qc-ltedirectdisc",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -6129,6 +6218,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libril-qc-radioconfig",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -6182,6 +6272,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "librilqmiservices",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -6228,6 +6319,7 @@ cc_prebuilt_library_shared {
         },
     },
     compile_multilib: "64",
+    check_elf_files: false,
     prefer: true,
     soc_specific: true,
 }
@@ -6235,6 +6327,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libsystem_health_mon",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -6262,6 +6355,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libthermalioctl",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -6288,6 +6382,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libwms",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -6366,6 +6461,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libxtadapter",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -6394,6 +6490,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libxtwifi_server_protocol",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -6425,6 +6522,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libxtwifi_server_protocol_uri_v3",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -6455,6 +6553,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "qcrild_librilutils",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -6479,6 +6578,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "qtibus",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -6507,6 +6607,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "qtimutex",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -6532,6 +6633,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.display.color@1.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -6560,6 +6662,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.display.color@1.1",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -6589,6 +6692,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.display.color@1.2",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -6619,6 +6723,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.display.postproc@1.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -6647,6 +6752,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.data.factory@2.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -6682,6 +6788,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.data.factory@2.1",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -6720,6 +6827,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.data.factory@2.2",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -6760,6 +6868,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.data.factory@2.3",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -6802,6 +6911,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.data.mwqem@1.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -6830,6 +6940,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.data.slm@1.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -6858,6 +6969,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.gnss@1.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -6887,6 +6999,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.gnss@1.1",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -6917,6 +7030,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.gnss@1.2",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -6948,6 +7062,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.gnss@2.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -6980,6 +7095,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.gnss@2.1",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -7013,6 +7129,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.gnss@3.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -7047,6 +7164,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.gnss@4.0-service",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -7088,6 +7206,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.gnss@4.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -7123,6 +7242,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.bluetooth_sar@1.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -7151,6 +7271,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.bluetooth_sar@1.1",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -7180,6 +7301,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.data.cne.internal.api@1.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -7209,6 +7331,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.data.cne.internal.constants@1.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -7237,6 +7360,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.data.cne.internal.server@1.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -7266,6 +7390,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.data.connection@1.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -7294,6 +7419,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.data.connection@1.1",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -7323,6 +7449,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.data.dynamicdds@1.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -7351,6 +7478,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.data.iwlan@1.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -7384,6 +7512,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.data.latency@1.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -7412,6 +7541,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.data.lce@1.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -7440,6 +7570,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.data.qmi@1.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -7469,6 +7600,7 @@ cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.fm@1.0_vendor",
     stem: "vendor.qti.hardware.fm@1.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -7498,6 +7630,7 @@ cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.mwqemadapter@1.0_vendor",
     stem: "vendor.qti.hardware.mwqemadapter@1.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -7527,6 +7660,7 @@ cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.qccsyshal@1.0_vendor",
     stem: "vendor.qti.hardware.qccsyshal@1.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -7555,6 +7689,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.qccvndhal@1.0-halimpl",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -7586,6 +7721,7 @@ cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.qccvndhal@1.0_vendor",
     stem: "vendor.qti.hardware.qccvndhal@1.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -7614,6 +7750,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.radio.am@1.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -7642,6 +7779,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.radio.ims@1.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -7670,6 +7808,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.radio.ims@1.1",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -7699,6 +7838,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.radio.ims@1.2",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -7729,6 +7869,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.radio.ims@1.3",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -7760,6 +7901,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.radio.ims@1.4",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -7792,6 +7934,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.radio.ims@1.5",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -7825,6 +7968,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.radio.ims@1.6",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -7859,6 +8003,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.radio.ims@1.7",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -7894,6 +8039,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.radio.internal.deviceinfo@1.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -7922,6 +8068,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.radio.lpa@1.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -7950,6 +8097,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.radio.lpa@1.1",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -7979,6 +8127,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.radio.qcrilhook@1.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -8007,6 +8156,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.radio.qtiradio@1.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -8035,6 +8185,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.radio.qtiradio@2.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -8065,6 +8216,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.radio.qtiradio@2.1",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -8096,6 +8248,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.radio.qtiradio@2.2",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -8128,6 +8281,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.radio.qtiradio@2.3",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -8161,6 +8315,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.radio.qtiradio@2.4",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -8196,6 +8351,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.radio.uim@1.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -8224,6 +8380,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.radio.uim@1.1",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -8253,6 +8410,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.radio.uim@1.2",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -8283,6 +8441,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.radio.uim_remote_client@1.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -8311,6 +8470,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.radio.uim_remote_client@1.1",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -8340,6 +8500,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.radio.uim_remote_client@1.2",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -8370,6 +8531,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.radio.uim_remote_server@1.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -8398,6 +8560,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.slmadapter@1.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -8426,6 +8589,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.tui_comm@1.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -8454,6 +8618,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.ims.callcapability@1.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -8482,6 +8647,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.ims.callinfo@1.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -8510,6 +8676,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.ims.factory@1.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -8540,6 +8707,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.ims.factory@1.1",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -8572,6 +8740,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.ims.rcsconfig@1.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -8600,6 +8769,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.ims.rcsconfig@1.1",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -8629,6 +8799,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.ims.rcsconfig@2.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -8657,6 +8828,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.ims.rcsconfig@2.1",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -8686,6 +8858,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.imsrtpservice@3.0-service-Impl",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -8720,6 +8893,7 @@ cc_prebuilt_library_shared {
     name: "vendor.qti.imsrtpservice@3.0_vendor",
     stem: "vendor.qti.imsrtpservice@3.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -8748,6 +8922,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.latency@2.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -8776,6 +8951,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.latency@2.1",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -8805,6 +8981,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "com.qualcomm.qti.dpm.api@1.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -8833,6 +9010,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "fm_helium",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -8861,6 +9039,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "lib-imscamera",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -8914,6 +9093,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "lib-imsvideocodec",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -8981,6 +9161,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "lib-imsvt",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -9017,6 +9198,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "lib-imsvtextutils",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -9048,6 +9230,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "lib-imsvtutils",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -9076,6 +9259,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libdiag_system",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -9108,6 +9292,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libdpmctmgr",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -9138,6 +9323,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libdpmfdmgr",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -9168,6 +9354,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libdpmframework",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -9201,6 +9388,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libdpmtcm",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -9231,6 +9419,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libfm-hci",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -9261,6 +9450,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libimscamera_jni",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -9289,6 +9479,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libimsmedia_jni",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -9320,6 +9511,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libmwqemiptablemgr",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -9351,6 +9543,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libqcc",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -9382,6 +9575,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "libqcc_file_agent_sys",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -9408,6 +9602,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.diaghal@1.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -9436,6 +9631,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.fm@1.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -9464,6 +9660,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.qccsyshal@1.0-halimpl",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -9495,6 +9692,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.qccsyshal@1.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -9523,6 +9721,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.hardware.qccvndhal@1.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -9551,6 +9750,7 @@ cc_prebuilt_library_shared {
 cc_prebuilt_library_shared {
     name: "vendor.qti.imsrtpservice@3.0",
     owner: "blackberry",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -9580,17 +9780,6 @@ android_app_import {
     name: "CneApp",
     owner: "blackberry",
     apk: "proprietary/vendor/app/CneApp/CneApp.apk",
-    certificate: "platform",
-    dex_preopt: {
-        enabled: false,
-    },
-    soc_specific: true,
-}
-
-android_app_import {
-    name: "IWlanService",
-    owner: "blackberry",
-    apk: "proprietary/vendor/app/IWlanService/IWlanService.apk",
     certificate: "platform",
     dex_preopt: {
         enabled: false,
@@ -9657,14 +9846,6 @@ android_app_import {
 }
 
 dex_import {
-    name: "com.blackberry.only",
-    owner: "blackberry",
-    jars: [
-        "proprietary/system/framework/com.blackberry.only.jar",
-    ],
-}
-
-dex_import {
     name: "com.qti.dpmframework",
     owner: "blackberry",
     jars: [
@@ -9703,6 +9884,7 @@ prebuilt_etc_xml {
 cc_prebuilt_binary {
     name: "adpl",
     owner: "blackberry",
+    check_elf_files: false,
     target: {
         android_arm64: {
             srcs: [
@@ -9739,6 +9921,7 @@ cc_prebuilt_binary {
 cc_prebuilt_binary {
     name: "cnd",
     owner: "blackberry",
+    check_elf_files: false,
     target: {
         android_arm64: {
             srcs: [
@@ -9785,6 +9968,7 @@ cc_prebuilt_binary {
 cc_prebuilt_binary {
     name: "cnss-daemon",
     owner: "blackberry",
+    check_elf_files: false,
     target: {
         android_arm64: {
             srcs: [
@@ -9818,6 +10002,7 @@ cc_prebuilt_binary {
 cc_prebuilt_binary {
     name: "dpmQmiMgr",
     owner: "blackberry",
+    check_elf_files: false,
     target: {
         android_arm64: {
             srcs: [
@@ -9854,6 +10039,7 @@ cc_prebuilt_binary {
 cc_prebuilt_binary {
     name: "hvdcp_opti",
     owner: "blackberry",
+    check_elf_files: false,
     target: {
         android_arm64: {
             srcs: [
@@ -9880,6 +10066,7 @@ cc_prebuilt_binary {
 cc_prebuilt_binary {
     name: "android.hardware.bluetooth@1.0-service-qti",
     owner: "blackberry",
+    check_elf_files: false,
     target: {
         android_arm64: {
             srcs: [
@@ -9950,75 +10137,9 @@ cc_prebuilt_binary {
 }
 
 cc_prebuilt_binary {
-    name: "android.hardware.gatekeeper@1.0-service-qti",
-    owner: "blackberry",
-    target: {
-        android_arm64: {
-            srcs: [
-                "proprietary/vendor/bin/hw/android.hardware.gatekeeper@1.0-service-qti",
-            ],
-            shared_libs: [
-                "android.hardware.gatekeeper@1.0",
-                "libhardware",
-                "libhidlbase",
-                "libhidltransport",
-                "libhwbinder",
-                "libutils",
-                "liblog",
-                "libc++",
-                "libc",
-                "libm",
-                "libdl",
-            ],
-        },
-    },
-    compile_multilib: "64",
-    strip: {
-        none: true,
-    },
-    prefer: true,
-    relative_install_path: "hw",
-    soc_specific: true,
-}
-
-cc_prebuilt_binary {
-    name: "android.hardware.keymaster@3.0-service-qti",
-    owner: "blackberry",
-    target: {
-        android_arm64: {
-            srcs: [
-                "proprietary/vendor/bin/hw/android.hardware.keymaster@3.0-service-qti",
-            ],
-            shared_libs: [
-                "liblog",
-                "libcutils",
-                "libbase",
-                "libutils",
-                "libhardware_legacy",
-                "libhardware",
-                "libhwbinder",
-                "libhidlbase",
-                "libhidltransport",
-                "android.hardware.keymaster@3.0",
-                "libc++",
-                "libc",
-                "libm",
-                "libdl",
-            ],
-        },
-    },
-    compile_multilib: "64",
-    strip: {
-        none: true,
-    },
-    prefer: true,
-    relative_install_path: "hw",
-    soc_specific: true,
-}
-
-cc_prebuilt_binary {
     name: "qcrild",
     owner: "blackberry",
+    check_elf_files: false,
     target: {
         android_arm64: {
             srcs: [
@@ -10049,6 +10170,7 @@ cc_prebuilt_binary {
 cc_prebuilt_binary {
     name: "vendor.display.color@1.0-service",
     owner: "blackberry",
+    check_elf_files: false,
     target: {
         android_arm64: {
             srcs: [
@@ -10085,6 +10207,7 @@ cc_prebuilt_binary {
 cc_prebuilt_binary {
     name: "vendor.qti.hardware.qteeconnector@1.0-service",
     owner: "blackberry",
+    check_elf_files: false,
     target: {
         android_arm64: {
             srcs: [
@@ -10116,6 +10239,7 @@ cc_prebuilt_binary {
 cc_prebuilt_binary {
     name: "vendor.qti.hardware.tui_comm@1.0-service-qti",
     owner: "blackberry",
+    check_elf_files: false,
     target: {
         android_arm64: {
             srcs: [
@@ -10150,6 +10274,7 @@ cc_prebuilt_binary {
 cc_prebuilt_binary {
     name: "ims_rtp_daemon",
     owner: "blackberry",
+    check_elf_files: false,
     target: {
         android_arm64: {
             srcs: [
@@ -10227,6 +10352,7 @@ cc_prebuilt_binary {
 cc_prebuilt_binary {
     name: "imsqmidaemon",
     owner: "blackberry",
+    check_elf_files: false,
     target: {
         android_arm64: {
             srcs: [
@@ -10258,6 +10384,7 @@ cc_prebuilt_binary {
 cc_prebuilt_binary {
     name: "imsrcsd",
     owner: "blackberry",
+    check_elf_files: false,
     target: {
         android_arm64: {
             srcs: [
@@ -10287,6 +10414,7 @@ cc_prebuilt_binary {
 cc_prebuilt_binary {
     name: "irsc_util",
     owner: "blackberry",
+    check_elf_files: false,
     target: {
         android_arm64: {
             srcs: [
@@ -10312,6 +10440,7 @@ cc_prebuilt_binary {
 cc_prebuilt_binary {
     name: "loc_launcher",
     owner: "blackberry",
+    check_elf_files: false,
     target: {
         android_arm64: {
             srcs: [
@@ -10374,6 +10503,7 @@ cc_prebuilt_binary {
 cc_prebuilt_binary {
     name: "mlid",
     owner: "blackberry",
+    check_elf_files: false,
     target: {
         android_arm64: {
             srcs: [
@@ -10416,7 +10546,6 @@ cc_prebuilt_binary {
                 "libhidlbase",
                 "libhidltransport",
                 "android.frameworks.sensorservice@1.0",
-                "libtinyxml",
                 "libc++",
                 "libc",
                 "libm",
@@ -10425,6 +10554,7 @@ cc_prebuilt_binary {
         },
     },
     compile_multilib: "64",
+    check_elf_files: false,
     strip: {
         none: true,
     },
@@ -10435,6 +10565,7 @@ cc_prebuilt_binary {
 cc_prebuilt_binary {
     name: "msm_irqbalance",
     owner: "blackberry",
+    check_elf_files: false,
     target: {
         android_arm64: {
             srcs: [
@@ -10462,6 +10593,7 @@ cc_prebuilt_binary {
 cc_prebuilt_binary {
     name: "netmgrd",
     owner: "blackberry",
+    check_elf_files: false,
     target: {
         android_arm64: {
             srcs: [
@@ -10509,6 +10641,7 @@ cc_prebuilt_binary {
 cc_prebuilt_binary {
     name: "pd-mapper",
     owner: "blackberry",
+    check_elf_files: false,
     target: {
         android_arm64: {
             srcs: [
@@ -10541,6 +10674,7 @@ cc_prebuilt_binary {
 cc_prebuilt_binary {
     name: "pm-proxy",
     owner: "blackberry",
+    check_elf_files: false,
     target: {
         android_arm64: {
             srcs: [
@@ -10569,6 +10703,7 @@ cc_prebuilt_binary {
 cc_prebuilt_binary {
     name: "pm-service",
     owner: "blackberry",
+    check_elf_files: false,
     target: {
         android_arm64: {
             srcs: [
@@ -10603,6 +10738,7 @@ cc_prebuilt_binary {
 cc_prebuilt_binary {
     name: "port-bridge",
     owner: "blackberry",
+    check_elf_files: false,
     target: {
         android_arm64: {
             srcs: [
@@ -10630,6 +10766,7 @@ cc_prebuilt_binary {
 cc_prebuilt_binary {
     name: "qrtr-cfg",
     owner: "blackberry",
+    check_elf_files: false,
     target: {
         android_arm64: {
             srcs: [
@@ -10655,6 +10792,7 @@ cc_prebuilt_binary {
 cc_prebuilt_binary {
     name: "qrtr-lookup",
     owner: "blackberry",
+    check_elf_files: false,
     target: {
         android_arm64: {
             srcs: [
@@ -10680,6 +10818,7 @@ cc_prebuilt_binary {
 cc_prebuilt_binary {
     name: "qrtr-ns",
     owner: "blackberry",
+    check_elf_files: false,
     target: {
         android_arm64: {
             srcs: [
@@ -10705,6 +10844,7 @@ cc_prebuilt_binary {
 cc_prebuilt_binary {
     name: "qseecomd",
     owner: "blackberry",
+    check_elf_files: false,
     target: {
         android_arm64: {
             srcs: [
@@ -10734,6 +10874,7 @@ cc_prebuilt_binary {
 cc_prebuilt_binary {
     name: "qti",
     owner: "blackberry",
+    check_elf_files: false,
     target: {
         android_arm64: {
             srcs: [
@@ -10770,6 +10911,7 @@ cc_prebuilt_binary {
 cc_prebuilt_binary {
     name: "rmt_storage",
     owner: "blackberry",
+    check_elf_files: false,
     target: {
         android_arm64: {
             srcs: [
@@ -10799,6 +10941,7 @@ cc_prebuilt_binary {
 cc_prebuilt_binary {
     name: "sensors.qti",
     owner: "blackberry",
+    check_elf_files: false,
     target: {
         android_arm64: {
             srcs: [
@@ -10831,6 +10974,7 @@ cc_prebuilt_binary {
 cc_prebuilt_binary {
     name: "tftp_server",
     owner: "blackberry",
+    check_elf_files: false,
     target: {
         android_arm64: {
             srcs: [
@@ -10858,6 +11002,7 @@ cc_prebuilt_binary {
 cc_prebuilt_binary {
     name: "thermal-engine",
     owner: "blackberry",
+    check_elf_files: false,
     target: {
         android_arm64: {
             srcs: [
@@ -10887,6 +11032,7 @@ cc_prebuilt_binary {
 cc_prebuilt_binary {
     name: "time_daemon",
     owner: "blackberry",
+    check_elf_files: false,
     target: {
         android_arm64: {
             srcs: [
@@ -10913,26 +11059,9 @@ cc_prebuilt_binary {
 }
 
 cc_prebuilt_binary {
-    name: "trace_util",
-    owner: "blackberry",
-    target: {
-        android_arm64: {
-            srcs: [
-                "proprietary/vendor/bin/trace_util",
-            ],
-        },
-    },
-    compile_multilib: "64",
-    strip: {
-        none: true,
-    },
-    prefer: true,
-    soc_specific: true,
-}
-
-cc_prebuilt_binary {
     name: "xtra-daemon",
     owner: "blackberry",
+    check_elf_files: false,
     target: {
         android_arm64: {
             srcs: [
@@ -10971,6 +11100,7 @@ cc_prebuilt_binary {
 cc_prebuilt_binary {
     name: "xtwifi-client",
     owner: "blackberry",
+    check_elf_files: false,
     target: {
         android_arm64: {
             srcs: [
@@ -11015,6 +11145,7 @@ cc_prebuilt_binary {
 cc_prebuilt_binary {
     name: "xtwifi-inet-agent",
     owner: "blackberry",
+    check_elf_files: false,
     target: {
         android_arm64: {
             srcs: [
@@ -11044,6 +11175,7 @@ cc_prebuilt_binary {
 cc_prebuilt_binary {
     name: "dpmd",
     owner: "blackberry",
+    check_elf_files: false,
     target: {
         android_arm64: {
             srcs: [
@@ -11133,4 +11265,24 @@ install_symlink {
     soc_specific: true,
     installed_location: "lib64/libq3dtools_adreno.so",
     symlink_target: "/vendor/lib64/egl/libq3dtools_adreno.so",
+}
+
+
+cc_prebuilt_binary {
+    name: "trace_util",
+    owner: "blackberry",
+    check_elf_files: false,
+    target: {
+        android_arm64: {
+            srcs: [
+                "proprietary/vendor/bin/trace_util",
+            ],
+        },
+    },
+    compile_multilib: "64",
+    strip: {
+        none: true,
+    },
+    prefer: true,
+    soc_specific: true,
 }

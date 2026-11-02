@@ -46,11 +46,8 @@ PRODUCT_COPY_FILES += \
     vendor/blackberry/sdm660-common/proprietary/vendor/etc/cne/wqeclient/VZW/VZW_profile6.xml:$(TARGET_COPY_OUT_VENDOR)/etc/cne/wqeclient/VZW/VZW_profile6.xml \
     vendor/blackberry/sdm660-common/proprietary/vendor/etc/data/dsi_config.xml:$(TARGET_COPY_OUT_VENDOR)/etc/data/dsi_config.xml \
     vendor/blackberry/sdm660-common/proprietary/vendor/etc/data/netmgr_config.xml:$(TARGET_COPY_OUT_VENDOR)/etc/data/netmgr_config.xml \
-    vendor/blackberry/sdm660-common/proprietary/vendor/etc/gps.prop:$(TARGET_COPY_OUT_VENDOR)/etc/gps.prop \
     vendor/blackberry/sdm660-common/proprietary/vendor/etc/init/android.hardware.bluetooth@1.0-service-qti.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/android.hardware.bluetooth@1.0-service-qti.rc \
     vendor/blackberry/sdm660-common/proprietary/vendor/etc/init/android.hardware.drm@1.0-service.widevine.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/android.hardware.drm@1.0-service.widevine.rc \
-    vendor/blackberry/sdm660-common/proprietary/vendor/etc/init/android.hardware.gatekeeper@1.0-service-qti.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/android.hardware.gatekeeper@1.0-service-qti.rc \
-    vendor/blackberry/sdm660-common/proprietary/vendor/etc/init/android.hardware.keymaster@3.0-service-qti.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/android.hardware.keymaster@3.0-service-qti.rc \
     vendor/blackberry/sdm660-common/proprietary/vendor/etc/init/cnd.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/cnd.rc \
     vendor/blackberry/sdm660-common/proprietary/vendor/etc/init/dataadpl.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/dataadpl.rc \
     vendor/blackberry/sdm660-common/proprietary/vendor/etc/init/dataqti.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/dataqti.rc \
@@ -68,11 +65,12 @@ PRODUCT_COPY_FILES += \
     vendor/blackberry/sdm660-common/proprietary/vendor/etc/init/vendor.qti.rmt_storage.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/vendor.qti.rmt_storage.rc \
     vendor/blackberry/sdm660-common/proprietary/vendor/etc/init/vendor.qti.tftp.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/vendor.qti.tftp.rc \
     vendor/blackberry/sdm660-common/proprietary/vendor/etc/izat.conf:$(TARGET_COPY_OUT_VENDOR)/etc/izat.conf \
-    vendor/blackberry/sdm660-common/proprietary/vendor/etc/qdcm_calib_data_Livata_video_mode_dsi_panel.xml:$(TARGET_COPY_OUT_VENDOR)/etc/qdcm_calib_data_Livata_video_mode_dsi_panel.xml \
-    vendor/blackberry/sdm660-common/proprietary/vendor/etc/qdcm_calib_data_Synaptics_video_mode_dsi_panel.xml:$(TARGET_COPY_OUT_VENDOR)/etc/qdcm_calib_data_Synaptics_video_mode_dsi_panel.xml \
+    vendor/blackberry/sdm660-common/proprietary/vendor/etc/lowi.conf:$(TARGET_COPY_OUT_VENDOR)/etc/lowi.conf \
     vendor/blackberry/sdm660-common/proprietary/vendor/etc/sap.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sap.conf \
     vendor/blackberry/sdm660-common/proprietary/vendor/etc/seccomp_policy/imsrtp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/imsrtp.policy \
+    vendor/blackberry/sdm660-common/proprietary/vendor/etc/thermal-engine.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-engine.conf \
     vendor/blackberry/sdm660-common/proprietary/vendor/etc/xtra_root_cert.pem:$(TARGET_COPY_OUT_VENDOR)/etc/xtra_root_cert.pem \
+    vendor/blackberry/sdm660-common/proprietary/vendor/etc/gps.prop:$(TARGET_COPY_OUT_VENDOR)/etc/gps.prop \
     vendor/blackberry/sdm660-common/proprietary/vendor/etc/xtra_single_boot.conf:$(TARGET_COPY_OUT_VENDOR)/etc/xtra_single_boot.conf \
     vendor/blackberry/sdm660-common/proprietary/vendor/etc/xtwifi.conf:$(TARGET_COPY_OUT_VENDOR)/etc/xtwifi.conf \
     vendor/blackberry/sdm660-common/proprietary/vendor/firmware/a225_pfp.fw:$(TARGET_COPY_OUT_VENDOR)/firmware/a225_pfp.fw \
@@ -142,8 +140,6 @@ PRODUCT_PACKAGES += \
     libGLESv2_adreno \
     libq3dtools_adreno \
     libq3dtools_esx \
-    android.hardware.gatekeeper@1.0-impl-qti \
-    android.hardware.keymaster@3.0-impl-qti \
     sound_trigger.primary.sdm660 \
     vulkan.adreno \
     lib-dplmedia \
@@ -153,8 +149,8 @@ PRODUCT_PACKAGES += \
     libGPreqcancel_svc \
     libOpenCL \
     libQSEEComAPI \
+    libgpudataproducer \
     libStDrvInt \
-    libVkLayer_q3dtools \
     libadreno_utils \
     libbccQTI \
     libc2d30_bltlib \
@@ -168,7 +164,6 @@ PRODUCT_PACKAGES += \
     libgcs-ipc \
     libgcs-osal \
     libgcs \
-    libgpudataproducer \
     libgpustats \
     libgsl \
     libhdr_tm \
@@ -176,11 +171,17 @@ PRODUCT_PACKAGES += \
     libkeymasterdeviceutils \
     libkeymasterprovision \
     libkeymasterutils \
+    android.hardware.keymaster@3.0-impl-qti \
+    android.hardware.keymaster@3.0-service-qti \
+    android.hardware.keymaster@4.0-service-qti \
+    android.hardware.gatekeeper@1.0-impl-qti \
+    android.hardware.gatekeeper@1.0-service-qti \
+    libqtikeymaster4 \
+    libqcbor \
     libllvm-glnext \
     libllvm-qcom \
     libmdmdetect \
     libmmosal_proprietary \
-    libperfgluelayer \
     libqcci_legacy \
     libqdi \
     libqdp \
@@ -214,6 +215,7 @@ PRODUCT_PACKAGES += \
     sensor_calibrate \
     sensors.ssc \
     vendor.qti.hardware.qteeconnector@1.0 \
+    libq3dtools_esx \
     android.hardware.drm@1.0-impl \
     libOmxVideoDSMode \
     libadpcmdec \
@@ -409,13 +411,11 @@ PRODUCT_PACKAGES += \
     vendor.qti.hardware.qccvndhal@1.0 \
     vendor.qti.imsrtpservice@3.0 \
     CneApp \
-    IWlanService \
     TimeService \
     QtiTelephonyService \
     dpmserviceapp \
     ims \
     qcrilmsgtunnel \
-    com.blackberry.only \
     com.qti.dpmframework \
     dpmapi \
     qcrilhook \
@@ -427,8 +427,6 @@ PRODUCT_PACKAGES += \
     hvdcp_opti \
     android.hardware.bluetooth@1.0-service-qti \
     android.hardware.drm@1.0-service.widevine \
-    android.hardware.gatekeeper@1.0-service-qti \
-    android.hardware.keymaster@3.0-service-qti \
     qcrild \
     vendor.display.color@1.0-service \
     vendor.qti.hardware.qteeconnector@1.0-service \
@@ -458,11 +456,11 @@ PRODUCT_PACKAGES += \
     tftp_server \
     thermal-engine \
     time_daemon \
-    trace_util \
     xtra-daemon \
     xtwifi-client \
     xtwifi-inet-agent \
-    dpmd
+    dpmd \
+    trace_util
 
 PRODUCT_PACKAGES += \
     system_ext_priv-app_ims_lib_arm64_libimscamera_jni_so \
