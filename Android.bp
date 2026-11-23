@@ -5,11 +5,12 @@
 soong_namespace {
     imports: [
         "device/blackberry/sdm660-common",
-        "hardware/qcom-caf/msm8998",
         "hardware/qcom-caf/wlan",
+        "hardware/qcom-caf/sdm660",
         "vendor/qcom/opensource/dataservices",
         "vendor/qcom/opensource/data-ipa-cfg-mgr-legacy-um",
         "vendor/qcom/opensource/display",
+        "vendor/qcom/opensource/commonsys/display",
     ],
 }
 
